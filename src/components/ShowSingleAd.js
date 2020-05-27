@@ -61,7 +61,7 @@ class ShowSingleAd extends Component {
         <div className="sub-title">{this.state.ad.title}</div>
         <div className="sub-title"><img src={this.state.ad.img} style={{ width: 400 + 'px' }} alt="ad-picture"></img></div>
         <div className="ad-info"><p>{this.state.ad.desc}</p></div>
-        <div className="sub-title"><p>{this.state.ad.price}</p></div>
+        <div className="sub-title"><p>{this.state.ad.price} kr</p></div>
         <div className="adList">
           <ul>
             <li></li>
