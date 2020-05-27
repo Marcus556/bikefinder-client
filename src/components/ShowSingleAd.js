@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 import axios from 'axios';
-import { Link } from 'react-router-dom'
-const apiUrl = 'http://localhost:5000/api/ads';
+const apiUrl = 'http://localhost:5000/api/ads/';
 
 
 
 
-class AdList extends Component {
+class ShowSingleAd extends Component {
   state = {
-    ads: [
+    ad: [
 
     ],
-    title: '',
-    url: '',
-    thumbnail: '',
-    img: '',
-    warningMsg: 'You need to login first',
     accessToken: localStorage.getItem('accessToken'),
     accessTokenConfig: {
       headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
@@ -26,19 +21,22 @@ class AdList extends Component {
   };
 
 
+
   componentDidMount() {
     if (this.state.accessToken) {
-      this.renderAdList();
+      this.getAd();
     }
 
   }
 
-  renderAdList() {
-    axios.get(apiUrl, this.state.accessTokenConfig)
+  getAd() {
+    const id = this.props.match.params.userid;
+    axios.get(`${apiUrl}${id}`, this.state.accessTokenConfig)
 
       .then(res => {
-        const ads = res.data;
-        this.setState({ ads });
+        const ad = res.data;
+        console.log(ad)
+        this.setState({ ad });
 
 
       })
@@ -53,24 +51,21 @@ class AdList extends Component {
 
 
   render() {
-    const ads = this.state.ads.map((item, key) =>
-      <li key={item._id}>
-        <img className="thumbnail" src={item.thumbnail} alt="adPic"></img>
-        <div>
-          <Link to={`/singlead/${item._id}`}>{item.title}</Link>
-          <br />
-      Pris: 43.000kr
-      </div>
-      </li>
-    );
+
+
     return (
-      <div className="container">
+      <div className="single-ad-container">
         <div className="logo"><img src={this.props.logo}></img></div>
         <div className="title">Mc Marknaden</div>
         <div className="sub-title">Begagnade touring-motorcyklar</div>
-        {!this.state.accessToken ? <div className="sub-title">{this.state.warningMsg}</div> : ''}
+        <div className="sub-title">{this.state.ad.title}</div>
+        <div className="sub-title"><img src={this.state.ad.img} style={{ width: 400 + 'px' }} alt="ad-picture"></img></div>
+        <div className="ad-info"><p>{this.state.ad.desc}</p></div>
+        <div className="sub-title"><p>{this.state.ad.price}</p></div>
         <div className="adList">
-          <ul>{ads}</ul>
+          <ul>
+            <li></li>
+          </ul>
         </div>
       </div>
 
@@ -81,5 +76,5 @@ class AdList extends Component {
 
 
 
-export default AdList;
+export default withRouter(ShowSingleAd);
 

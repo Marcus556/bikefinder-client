@@ -11,6 +11,8 @@ const LoginForm = (props) => {
     axios.post('http://localhost:5000/users/login', form)
       .then((res) => {
         console.log(res.data)
+        console.log(res.data)
+        localStorage.setItem('accessToken', res.data.accessToken);
       }).catch((error) => {
         console.log(error)
       });

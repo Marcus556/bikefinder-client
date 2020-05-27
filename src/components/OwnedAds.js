@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
-const apiUrl = 'http://localhost:5000/api/ads';
+const apiUrl = 'http://localhost:5000/api/ads/owned';
 
 
 
 
-class AdList extends Component {
+class OwnedAds extends Component {
   state = {
     ads: [
 
@@ -57,7 +56,7 @@ class AdList extends Component {
       <li key={item._id}>
         <img className="thumbnail" src={item.thumbnail} alt="adPic"></img>
         <div>
-          <Link to={`/singlead/${item._id}`}>{item.title}</Link>
+          <a href={item.url}>{item.title}</a>
           <br />
       Pris: 43.000kr
       </div>
@@ -81,5 +80,5 @@ class AdList extends Component {
 
 
 
-export default AdList;
+export default OwnedAds;
 

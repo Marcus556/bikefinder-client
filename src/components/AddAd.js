@@ -13,11 +13,15 @@ const AddAd = (props) => {
       [e.target.name]: e.target.value
     })
   }
+  const accessToken = localStorage.getItem('accessToken');
+  const accessTokenConfig = {
+    headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` }
+  }
 
 
 
   const postAd = () => {
-    axios.post('http://localhost:5000/api/ads', newAd)
+    axios.post('http://localhost:5000/api/ads', newAd, accessTokenConfig)
       .then((res) => {
         console.log(res.data)
       }).catch((error) => {
@@ -30,6 +34,14 @@ const AddAd = (props) => {
     })
 
   }
+
+
+
+
+
+
+
+
 
 
   return (

@@ -16,6 +16,7 @@ body {
   color: #555;
   background: #ecf0f3;
 }
+
 .App {
 }
 
@@ -48,6 +49,20 @@ body {
   background: #ecf0f3;
   box-shadow: 13px 13px 20px #cbced1,
   -13px -13px 20px #ffffff;
+
+}
+.single-ad-container{
+  margin-top: 50px;
+  width: 1100px;
+  padding-top: 50px;
+  border-radius: 40px;
+  background: #ecf0f3;
+  box-shadow: 13px 13px 20px #cbced1,
+  -13px -13px 20px #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
@@ -70,6 +85,11 @@ body {
   font-size: 18px;
   padding-top: 7px;
   letter-spacing: 1px;
+}
+
+.ad-info p {
+    white-space: pre-line;
+    width: 500px;
 }
 
 .container ul {
@@ -95,6 +115,8 @@ body {
   font-size: 18px;
   letter-spacing: 1px;
 }
+
+
 .container ul li:hover {
   background: #ebf2f8;
   box-shadow: 0px 0px 2px #5f5f5f,

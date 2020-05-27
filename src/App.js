@@ -7,6 +7,8 @@ import RegisterForm from './components/RegisterForm'
 import LoginForm from './components/LoginForm'
 import NavBar from './components/NavBar'
 import AddAd from './components/AddAd'
+import OwnedAds from './components/OwnedAds'
+import ShowSingleAd from './components/ShowSingleAd'
 
 function App() {
   return (
@@ -23,6 +25,15 @@ function App() {
           <Switch>
             <Route exact path="/add">
               <AddAd logo={logo}></AddAd>
+            </Route>
+            <Route exact path="/yourads">
+              <OwnedAds logo={logo}></OwnedAds>
+            </Route>
+            <Route exact path="/singlead">
+              <ShowSingleAd logo={logo}></ShowSingleAd>
+            </Route>
+            <Route exact path="/singlead/:userid">
+              <ShowSingleAd logo={logo}></ShowSingleAd>
             </Route>
             <Route exact path="/login">
               <LoginForm logo={logo}></LoginForm>
