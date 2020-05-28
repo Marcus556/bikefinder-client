@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import SortingBar from './SortingBar'
+const apiUrl = 'http://localhost:5000/api/ads';
 
 
 
 
-class AdList extends Component {
+class TestAdList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +42,7 @@ class AdList extends Component {
   }
 
   renderAdList() {
-    axios.get(this.props.apiUrl, this.state.accessTokenConfig)
+    axios.get(this.props.testurl, this.state.accessTokenConfig)
 
       .then(res => {
         const ads = res.data;
@@ -132,10 +133,10 @@ class AdList extends Component {
         <div className="sub-title">Begagnade touring-motorcyklar</div>
 
         {!this.state.accessToken ? <div className="sub-title">{this.state.warningMsg}</div> : ''}
-        <div className="adListContainer">
+        <div className="adList">
           {this.state.accessToken ? <SortingBar sort={this.sortAds.bind(this)}></SortingBar> : ''}
 
-          <ul className="adList">
+          <ul>
             {ads}
           </ul>
         </div>
@@ -149,5 +150,5 @@ class AdList extends Component {
 
 
 
-export default AdList;
+export default TestAdList;
 

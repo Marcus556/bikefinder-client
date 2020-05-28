@@ -16,6 +16,7 @@ const NavBar = () => {
         <li><Link className="nav-link" to="/">Ads</Link></li>
         <li><Link className="nav-link" to="/add">Register ad</Link></li>
         <li><Link className="nav-link" to="/yourads">Your ads</Link></li>
+        <li><Link className="nav-link" to="/messages">Messages</Link></li>
         <li onClick={logout}><Link className="nav-link" to="/">Logout</Link></li>
       </ul>
     </div>
