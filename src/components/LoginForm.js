@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { withRouter, Link } from "react-router-dom";
 
 const LoginForm = (props) => {
   const [form, setForm] = useState({
@@ -13,7 +14,19 @@ const LoginForm = (props) => {
         console.log(res.data)
         console.log(res.data)
         localStorage.setItem('accessToken', res.data.accessToken);
-      }).catch((error) => {
+        localStorage.setItem('loggedIn', true);
+        if (res.data.admin === true) {
+          localStorage.setItem('isAdmin', 'true');
+        }
+        if (res.data.accessToken) {
+          props.toggleLoggedIn()
+          props.history.push("/");
+
+        }
+
+
+      })
+      .catch((error) => {
         console.log(error)
       });
     setForm({
@@ -55,6 +68,7 @@ const LoginForm = (props) => {
           onChange={handleChange}
         ></input>
         <button onClick={loginUser}>Login</button>
+        <p>No account? <Link className="register-link" to="/register">Sign up today!</Link></p>
 
       </div>
     </div>
@@ -66,4 +80,4 @@ const LoginForm = (props) => {
 
 
 
-export default LoginForm;
+export default withRouter(LoginForm);

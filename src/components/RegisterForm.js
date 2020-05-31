@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { withRouter } from "react-router-dom";
 
 const RegisterForm = (props) => {
   const [form, setForm] = useState({
@@ -8,9 +9,11 @@ const RegisterForm = (props) => {
   });
 
   const registerUser = () => {
+    if (form.username === '' || form.password === '') return
     axios.post('http://localhost:5000/users', form)
       .then((res) => {
         console.log(res.data)
+        props.history.push('/login')
       }).catch((error) => {
         console.log(error)
       });
@@ -34,7 +37,7 @@ const RegisterForm = (props) => {
 
     <div className="container">
       <div className="logo"><img src={props.logo}></img></div>
-      <div className="title">Registration form</div>
+      <div className="title">Sign up!</div>
       <div className="sub-title">Register your account now</div>
       <div className="formGroup">
         <label htmlFor="username">Username:</label>
@@ -62,4 +65,4 @@ const RegisterForm = (props) => {
 
 
 
-export default RegisterForm;
+export default withRouter(RegisterForm);

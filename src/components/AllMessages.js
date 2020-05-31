@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SendMessage from './SendMessage'
 import ShowSingleAd from './ShowSingleAd';
+import ApiDeleteButton from './ApiDeleteButton'
 
 
 class AllMessages extends Component {
@@ -57,6 +58,11 @@ class AllMessages extends Component {
       })
     }
   }
+  testDel(key) {
+    let messages = this.state.messages
+    const removed = this.state.messages.splice(key, 1);
+    this.setState({ messages })
+  }
 
 
   render() {
@@ -72,7 +78,8 @@ class AllMessages extends Component {
           style={this.state.showSendMessage && this.state.key == key ? { backgroundColor: "#A01C16" } : { backgroundColor: '' }}>
           {this.state.showSendMessage && this.state.key == key ? 'Close' : 'Answer message'}
         </button>
-      </ul>
+        <ApiDeleteButton deleteUrl={`${this.props.apiUrl}/${item.id}`} del={this.testDel.bind(this, key)}></ApiDeleteButton>
+      </ul >
     );
     return (
       <div className="container">

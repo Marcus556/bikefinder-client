@@ -113,7 +113,8 @@ class AddAd extends Component {
           <input type="file"
             name="adImage"
             accept="image/png, image/jpeg"
-            onChange={this.handleFileSelect}></input>
+            onChange={this.handleFileSelect}
+            class="fileInput"></input>
           {this.state.showWarning ? <span className="warningMsg">{this.state.warningMsg}</span> : ''}
           <button onClick={this.postAd}>Add ad</button>
 

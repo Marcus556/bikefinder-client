@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import SortingBar from './SortingBar'
+import ApiDeleteButton from './ApiDeleteButton'
 
 
 
@@ -10,12 +11,14 @@ class AdList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loggedIn: localStorage.getItem('loggedIn'),
       ads: [],
       sorted: false,
       title: '',
       url: '',
       thumbnail: '',
       img: '',
+      searchValue: '',
       warningMsg: 'You need to login first',
       accessToken: localStorage.getItem('accessToken'),
       accessTokenConfig: {
@@ -35,10 +38,12 @@ class AdList extends Component {
 
 
   componentDidMount() {
+    if (!this.state.loggedIn) this.props.history.push('/login')
     if (this.state.accessToken) {
       this.renderAdList();
     }
   }
+
 
   renderAdList() {
     axios.get(this.props.apiUrl, this.state.accessTokenConfig)
@@ -46,8 +51,6 @@ class AdList extends Component {
       .then(res => {
         const ads = res.data;
         this.setState({ ads });
-
-
       })
       .catch(function (error) {
         if (error.response) {
@@ -56,6 +59,7 @@ class AdList extends Component {
           }
         }
       })
+
   }
 
   sortAds(e) {
@@ -111,6 +115,23 @@ class AdList extends Component {
       }
     }
   }
+  handleChange = e => {
+    console.log(this.state.searchValue)
+    this.setState({ searchValue: e.target.value })
+  }
+
+  searchAds() {
+    console.log('funk')
+    const searchValue = 'Yamaha Xj600';
+    const ads = this.state.ads;
+    let searchResults = [];
+    for (let i = 0; i < ads.length; i++) {
+      if (ads[i].title == searchValue) {
+        searchResults.push(ads[i]);
+      }
+    }
+    console.log(searchResults)
+  }
 
 
   render() {
@@ -134,7 +155,12 @@ class AdList extends Component {
         {!this.state.accessToken ? <div className="sub-title">{this.state.warningMsg}</div> : ''}
         <div className="adListContainer">
           {this.state.accessToken ? <SortingBar sort={this.sortAds.bind(this)}></SortingBar> : ''}
-
+          <div className="formGroup">
+            <div className="searchContainer">
+              <input type="text" placeholder="search.." className="searchbar" value={this.state.searchValue} onChange={this.handleChange}></input>
+              <button className="searchBtn" onClick={this.searchAds.bind(this)}>></button>
+            </div>
+          </div>
           <ul className="adList">
             {ads}
           </ul>
@@ -149,5 +175,5 @@ class AdList extends Component {
 
 
 
-export default AdList;
+export default withRouter(AdList);
 

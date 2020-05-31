@@ -17,27 +17,69 @@ body {
   background: #ecf0f3;
 }
 
-.App {
+button {
+  outline: none;
+  border:none;
+  cursor: pointer;
 }
 
+input , textarea{
+  border: solid rgb(185, 185, 185) 1px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+textarea:focus, input:focus, input:focus{
+  outline: none;
+}
+
+.fileInput {
+  border: none;
+}
 .navBar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.navBar ul {
+.navBarAdmin {
+  width: 80%;
+  height: 3rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #4e0c03;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: #4e0c03 solid 1px;
+  border-radius: 10px;
+}
+.navBar ul, .navBarAdmin ul {
   list-style: none;
   display: flex;
+  margin-right: 10px;
+
 }
-.navBar ul li {
+.navBar a, .navBarAdmin ul li {
   margin-left: 2rem;
 }
-.navBar a {
+.navBar a, .navBarAdmin a {
   color: inherit;
   opacity: 0.8;
   text-decoration: none;
 }
-.navBar a:hover {
+
+ .register-link {
+  color: #106957;
+  opacity: 0.9;
+  text-decoration: none;
+}
+.register-link:hover {
+  opacity: 1;
+}
+
+.navBarAdmin a {
+  color: #4e0c03;
+}
+.navBar a:hover, .navBarAdmin a:hover {
   opacity: 1;
 }
 
@@ -297,4 +339,30 @@ input[type=number]::-webkit-outer-spin-button {
 .messageSignature {
   margin-top: .5rem;
   font-size: .9rem;
+}
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.searchContainer input, .searchContainer.searchBtn {
+  border: none;
+  
+}
+.searchbar {
+  box-sizing: border-box;
+  border-top-right-radius:  0;
+  border-bottom-right-radius:  0;
+  box-shadow: 3px 3px 8px #b1b1b1,
+}
+
+.formGroup .searchBtn {
+  height: 1.4rem;
+  width: 2rem;
+  border: none;
+  border-radius: 5px;
+  border-top-left-radius:  0;
+  border-bottom-left-radius:  0;
+  padding: 0;
+  box-shadow: 0;
 }
