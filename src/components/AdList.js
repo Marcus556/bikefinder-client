@@ -122,15 +122,17 @@ class AdList extends Component {
 
   searchAds() {
     console.log('funk')
-    const searchValue = 'Yamaha Xj600';
+    const searchValue = this.state.searchValue.toLowerCase();
     const ads = this.state.ads;
     let searchResults = [];
     for (let i = 0; i < ads.length; i++) {
-      if (ads[i].title == searchValue) {
+      if (ads[i].title.toLowerCase().includes(searchValue)) {
         searchResults.push(ads[i]);
       }
     }
+    this.setState({ ads: searchResults, searchValue: '' })
     console.log(searchResults)
+
   }
 
 

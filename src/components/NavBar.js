@@ -15,6 +15,7 @@ class NavBar extends Component {
   }
   componentDidMount() {
     if (localStorage.getItem('accessToken')) this.checkForNewMessages()
+    console.log(this.state.loggedIn)
   }
   componentWillReceiveProps(nextProps) {
     this.setState({ loggedIn: nextProps.loggedIn });
@@ -31,6 +32,7 @@ class NavBar extends Component {
     this.setState({ loggedIn: false })
     this.props.toggleLoggedIn('logout')
     this.props.history.push('/login')
+    console.log(this.state.loggedIn)
 
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { withRouter } from 'react-router-dom'
 
 
 class AddAd extends Component {
@@ -64,8 +65,8 @@ class AddAd extends Component {
     axios.post('http://localhost:5000/api/ads', data, this.state.accessTokenConfig)
       .then((res) => {
         console.log(res.data)
-        if (res.status === 500) {
-          console.log('500 test funkar')
+        if (res.data) {
+          this.props.history.push('/')
         }
       }).catch((error) => {
         console.log(error)
@@ -114,7 +115,7 @@ class AddAd extends Component {
             name="adImage"
             accept="image/png, image/jpeg"
             onChange={this.handleFileSelect}
-            class="fileInput"></input>
+            className="fileInput"></input>
           {this.state.showWarning ? <span className="warningMsg">{this.state.warningMsg}</span> : ''}
           <button onClick={this.postAd}>Add ad</button>
 
@@ -127,5 +128,5 @@ class AddAd extends Component {
 
 
 
-export default AddAd;
+export default withRouter(AddAd);
 
